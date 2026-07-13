@@ -152,13 +152,13 @@ impl ServerHandler for Handler {
     ) -> Result<CallToolResult, CallToolError> {
         let name = params.name.as_str();
         match name {
-            "list_pages" => {
-                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'list_pages' with arguments: {:?}", params.arguments);
+            "cn_c_list_pages" => {
+                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'cn_c_list_pages' with arguments: {:?}", params.arguments);
                 let args = get_args(&params, name)?;
                 let library = get_string_arg(args, name, "library")?;
                 
                 let pages = self.get_pages_in_lib(library);
-                tracing::info!("[ChaosNexus Codex] 📄  'list_pages' found {} pages in library '{}'", pages.len(), library);
+                tracing::info!("[ChaosNexus Codex] 📄  'cn_c_list_pages' found {} pages in library '{}'", pages.len(), library);
                 
                 if pages.is_empty() {
                     return Ok(CallToolResult::text_content(vec![
@@ -175,8 +175,8 @@ impl ServerHandler for Handler {
                     ),
                 ]))
             }
-            "search_docs" => {
-                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'search_docs' with arguments: {:?}", params.arguments);
+            "cn_c_search_docs" => {
+                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'cn_c_search_docs' with arguments: {:?}", params.arguments);
                 let args = get_args(&params, name)?;
                 let library = get_string_arg(args, name, "library")?;
                 let query_str = get_string_arg(args, name, "query")?;
@@ -205,8 +205,8 @@ impl ServerHandler for Handler {
                     ),
                 ]))
             }
-            "read_doc_page" => {
-                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'read_doc_page' with arguments: {:?}", params.arguments);
+            "cn_c_read_doc_page" => {
+                tracing::info!("[ChaosNexus Codex] 🛠️  Called 'cn_c_read_doc_page' with arguments: {:?}", params.arguments);
                 let args = get_args(&params, name)?;
                 let library = get_string_arg(args, name, "library")?;
                 let page = get_string_arg(args, name, "page")?;
@@ -275,9 +275,9 @@ impl ServerHandler for Handler {
                     rust_mcp_sdk::schema::TextContent::from(text),
                 ]))
             }
-            "add_docs" => {
+            "cn_c_add_docs" => {
                 #[cfg(feature = "embed-docs")]
-                return Err(CallToolError::invalid_arguments(name, Some("add_docs is not supported when running with embed-docs feature.".to_string())));
+                return Err(CallToolError::invalid_arguments(name, Some("cn_c_add_docs is not supported when running with embed-docs feature.".to_string())));
 
                 #[cfg(not(feature = "embed-docs"))]
                 {
@@ -312,9 +312,9 @@ impl ServerHandler for Handler {
                     Ok(CallToolResult::text_content(vec![rust_mcp_sdk::schema::TextContent::from("Library added to configuration. Fetching in the background...".to_string())]))
                 }
             }
-            "remove_docs" => {
+            "cn_c_remove_docs" => {
                 #[cfg(feature = "embed-docs")]
-                return Err(CallToolError::invalid_arguments(name, Some("remove_docs is not supported when running with embed-docs feature.".to_string())));
+                return Err(CallToolError::invalid_arguments(name, Some("cn_c_remove_docs is not supported when running with embed-docs feature.".to_string())));
 
                 #[cfg(not(feature = "embed-docs"))]
                 {
@@ -341,7 +341,7 @@ impl ServerHandler for Handler {
                     Ok(CallToolResult::text_content(vec![rust_mcp_sdk::schema::TextContent::from(format!("Library '{}' removed successfully.", dst_folder))]))
                 }
             }
-            "chaosdocs_get_status" => {
+            "cn_c_get_status" => {
                 let config = crate::config::CodexConfig::load();
                 let config_json = serde_json::to_value(&config)
                     .map_err(|e| CallToolError::from_message(format!("Failed to serialize config: {}", e)))?;
@@ -368,7 +368,7 @@ impl ServerHandler for Handler {
 
         let mut tools = vec![
             Tool {
-                name: "list_pages".to_string(),
+                name: "cn_c_list_pages".to_string(),
                 description: Some(
                     "List all available documentation pages for a specific library.".to_string(),
                 ),
@@ -388,7 +388,7 @@ impl ServerHandler for Handler {
                 icons: Vec::new(),
             },
             Tool {
-                name: "search_docs".to_string(),
+                name: "cn_c_search_docs".to_string(),
                 description: Some("Search for documentation pages within a specific library by matching the query against filenames.".to_string()),
                 input_schema: serde_json::from_value(json!({
                     "type": "object",
@@ -401,7 +401,7 @@ impl ServerHandler for Handler {
                 meta: None, output_schema: None, title: None, annotations: None, execution: None, icons: Vec::new(),
             },
             Tool {
-                name: "read_doc_page".to_string(),
+                name: "cn_c_read_doc_page".to_string(),
                 description: Some("Read the contents of a specific documentation page. Provide exact library and page name. Supports offset and limit for pagination.".to_string()),
                 input_schema: serde_json::from_value(json!({
                     "type": "object",
@@ -420,7 +420,7 @@ impl ServerHandler for Handler {
         #[cfg(not(feature = "embed-docs"))]
         {
             tools.push(Tool {
-                name: "add_docs".to_string(),
+                name: "cn_c_add_docs".to_string(),
                 description: Some("Add a new documentation library to the configuration and fetch it immediately (only works if not compiled with embed-docs).".to_string()),
                 input_schema: serde_json::from_value(json!({
                     "type": "object",
@@ -435,7 +435,7 @@ impl ServerHandler for Handler {
                 meta: None, output_schema: None, title: None, annotations: None, execution: None, icons: Vec::new(),
             });
             tools.push(Tool {
-                name: "remove_docs".to_string(),
+                name: "cn_c_remove_docs".to_string(),
                 description: Some("Remove a documentation library from the configuration (only works if not compiled with embed-docs).".to_string()),
                 input_schema: serde_json::from_value(json!({
                     "type": "object",
@@ -449,7 +449,7 @@ impl ServerHandler for Handler {
         }
 
         tools.push(Tool {
-            name: "chaosdocs_get_status".to_string(),
+            name: "cn_c_get_status".to_string(),
             description: Some("Returns the active read-only configuration settings and the absolute path to the documentation storage directory. Use this to orient the agent to the environment.".to_string()),
             input_schema: serde_json::from_value(json!({
                 "type": "object",
@@ -655,7 +655,7 @@ async fn main() -> SdkResult<()> {
         meta: None,
         protocol_version: ProtocolVersion::V2025_11_25.into(),
         instructions: Some(
-            "Use search_docs to find relevant files, and read_doc_page to extract markdown contents.".to_string(),
+            "ChaosNexus Codex is a documentation tool that searches and reads locally fetched github repositories markdown documentation. Use cn_c_search_docs to find relevant files, and cn_c_read_doc_page to extract markdown contents.".to_string()
         ),
     };
 
