@@ -119,6 +119,7 @@ impl CodexConfig {
     }
 
     /// Saves the current configuration to the `chaosnexus-codex.toml` file.
+    #[allow(dead_code)]
     pub fn save(&self) -> std::io::Result<()> {
         let config_path = Path::new("chaosnexus-codex.toml");
         let contents = toml::to_string(self).map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e))?;
