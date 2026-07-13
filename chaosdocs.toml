@@ -1,0 +1,548 @@
+# ChaosNexus Codex Configuration
+# This file tells chaosnexus-codex which documentation repositories to fetch and serve.
+
+# storage_path = "~/.local/share/chaosnexus-codex/data" # Uncomment to override the default storage path.
+# port = 3000 # Uncomment to run as an SSE HTTP server on the given port by default
+# default_offset = 0 # Default character offset for reading documentation pages
+# default_limit = 16000 # Default maximum character limit for reading documentation pages
+
+# Example of configuring a library repository:
+# [[libraries]]
+# repo_url = "https://github.com/example/repo.git"
+# sub_dir = "docs" # Optional: only fetch docs from a specific sub-directory in the repository
+# dst_folder = "example-repo" # The local folder name to store the docs
+# use_sparse = true # Optional: use sparse checkout to only fetch the sub_dir
+
+### Core Libraries ###
+
+[[libraries]]
+repo_url = "https://github.com/dtolnay/anyhow.git"
+# sub_dir = ""
+dst_folder = "anyhow"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/dtolnay/async-trait.git"
+# sub_dir = ""
+dst_folder = "async-trait"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tokio-rs/axum.git"
+# sub_dir = ""
+dst_folder = "axum"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/marshallpierce/rust-base64.git"
+# sub_dir = ""
+dst_folder = "base64"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tafia/calamine.git"
+# sub_dir = ""
+dst_folder = "calamine"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/chronotope/chrono.git"
+# sub_dir = ""
+dst_folder = "chrono"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/chronotope/chrono-tz.git"
+# sub_dir = ""
+dst_folder = "chrono-tz"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/clap-rs/clap.git"
+# sub_dir = ""
+dst_folder = "clap"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/BurntSushi/rust-csv.git"
+# sub_dir = ""
+dst_folder = "csv"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/soc/directories-rs.git"
+# sub_dir = ""
+dst_folder = "directories"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/soc/dirs-rs.git"
+# sub_dir = ""
+dst_folder = "dirs"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/allan2/dotenvy.git"
+# sub_dir = ""
+dst_folder = "dotenvy"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-lang/futures-rs.git"
+# sub_dir = ""
+dst_folder = "futures-util"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/KokaKiwi/rust-hex.git"
+# sub_dir = ""
+dst_folder = "hex"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/RustCrypto/MACs.git"
+# sub_dir = ""
+dst_folder = "hmac"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/RustCrypto/hashes.git"
+# sub_dir = ""
+dst_folder = "md-5"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/notify-rs/notify.git"
+# sub_dir = ""
+dst_folder = "notify"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/redis-rs/redis-rs.git"
+# sub_dir = ""
+dst_folder = "redis"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-lang/regex.git"
+# sub_dir = ""
+dst_folder = "regex"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/seanmonstar/reqwest.git"
+# sub_dir = ""
+dst_folder = "reqwest"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/PolyMeilex/rfd.git"
+# sub_dir = ""
+dst_folder = "rfd"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rhaiscript/rhai.git"
+# sub_dir = ""
+dst_folder = "rhai"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rhaiscript/book.git"
+sub_dir = "src"
+dst_folder = "rhai-book"
+use_sparse = true
+
+[[libraries]]
+repo_url = "https://github.com/dobaksz/rsntp.git"
+# sub_dir = ""
+dst_folder = "rsntp"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://pyrossh.dev/repos/rust-embed"
+# sub_dir = ""
+dst_folder = "rust-embed"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-mcp-stack/rust-mcp-sdk.git"
+# sub_dir = ""
+dst_folder = "rust-mcp-axum"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-mcp-stack/rust-mcp-sdk.git"
+# sub_dir = ""
+dst_folder = "rust-mcp-sdk"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-mcp-stack/rust-mcp-sdk.git"
+# sub_dir = ""
+dst_folder = "rust-mcp-transport"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/SeaQL/sea-orm.git"
+# sub_dir = ""
+dst_folder = "sea-orm"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/serde-rs/serde.git"
+# sub_dir = ""
+dst_folder = "serde"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/serde-rs/json.git"
+# sub_dir = ""
+dst_folder = "serde_json"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/RustCrypto/hashes.# it"
+# sub_dir = ""
+dst_folder = "sha2"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/skytable/client-rust.git"
+# sub_dir = ""
+dst_folder = "skytable"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/spacejam/sled.git"
+# sub_dir = ""
+dst_folder = "sled"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/launchbadge/sqlx.git"
+# sub_dir = ""
+dst_folder = "sqlx"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/Stebalien/tempfile.git"
+# sub_dir = ""
+dst_folder = "tempfile"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tokio-rs/tokio.git"
+# sub_dir = ""
+dst_folder = "tokio"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/snapview/tokio-tungstenite.git"
+# sub_dir = ""
+dst_folder = "tokio-tungstenite"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/toml-rs/toml.git"
+# sub_dir = ""
+dst_folder = "toml"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tokio-rs/tracing.git"
+# sub_dir = ""
+dst_folder = "tracing"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tokio-rs/tracing.git"
+# sub_dir = ""
+dst_folder = "tracing-subscriber"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/BurntSushi/walkdir.git"
+# sub_dir = ""
+dst_folder = "walkdir"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/rust-lang/rust.git"
+dst_folder = "rust"
+use_sparse = false
+
+### Full Stack Libraries ###
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/tauri.git"
+sub_dir = ""
+dst_folder = "tauri"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/hypothesi/mcp-server-tauri.git"
+sub_dir = ""
+dst_folder = "tauri-plugin-mcp-bridge"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/plugins-workspace.git"
+sub_dir = ""
+dst_folder = "tauri-plugin-opener"
+use_sparse = false
+
+
+[[libraries]]
+repo_url = "https://github.com/huntabyte/shadcn-svelte.git"
+dst_folder = "shadcn"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/nodejs/node.git"
+dst_folder = "node"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/huntabyte/bits-ui.git"
+dst_folder = "bits-ui"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/iconify/icon-sets.git"
+sub_dir = ""
+dst_folder = "iconify-json-lucide"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/microsoft/playwright.git"
+sub_dir = ""
+dst_folder = "playwright-test"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/kit.git"
+sub_dir = ""
+dst_folder = "sveltejs-adapter-static"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/kit.git"
+sub_dir = ""
+dst_folder = "sveltejs-kit"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/vite-plugin-svelte.git"
+sub_dir = ""
+dst_folder = "sveltejs-vite-plugin-svelte"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tailwindlabs/tailwindcss.git"
+sub_dir = ""
+dst_folder = "tailwindcss-vite"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/tauri.git"
+sub_dir = ""
+dst_folder = "tauri-apps-api"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/tauri.git"
+sub_dir = ""
+dst_folder = "tauri-apps-cli"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/plugins-workspace.git"
+sub_dir = ""
+dst_folder = "tauri-apps-plugin-opener"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/testing-library/svelte-testing-library.git"
+sub_dir = ""
+dst_folder = "testing-library-svelte"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+sub_dir = ""
+dst_folder = "types-node"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vitest-dev/vitest.git"
+sub_dir = ""
+dst_folder = "vitest-ui"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/xyflow/xyflow.git"
+sub_dir = ""
+dst_folder = "xyflow-svelte"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/cure53/DOMPurify.git"
+sub_dir = ""
+dst_folder = "dompurify"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/evanw/esbuild.git"
+sub_dir = ""
+dst_folder = "esbuild"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/jsdom/jsdom.git"
+sub_dir = ""
+dst_folder = "jsdom"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/markedjs/marked.git"
+sub_dir = ""
+dst_folder = "marked"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/microsoft/monaco-editor.git"
+sub_dir = ""
+dst_folder = "monaco-editor"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/prettier/prettier.git"
+sub_dir = ""
+dst_folder = "prettier"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/prettier-plugin-svelte.git"
+sub_dir = ""
+dst_folder = "prettier-plugin-svelte"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/svelte.git"
+sub_dir = ""
+dst_folder = "svelte"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/sveltejs/language-tools.git"
+sub_dir = ""
+dst_folder = "svelte-check"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tailwindlabs/tailwindcss.git"
+sub_dir = ""
+dst_folder = "tailwindcss"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/tauri-apps/tauri.git"
+sub_dir = ""
+dst_folder = "tauri"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/microsoft/TypeScript.git"
+sub_dir = ""
+dst_folder = "typescript"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/unplugin/unplugin-icons.git"
+sub_dir = ""
+dst_folder = "unplugin-icons"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vitejs/vite.git"
+sub_dir = ""
+dst_folder = "vite"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vdesjs/vite-plugin-monaco-editor.git"
+sub_dir = ""
+dst_folder = "vite-plugin-monaco-editor"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vitest-dev/vitest.git"
+sub_dir = ""
+dst_folder = "vitest"
+use_sparse = false
+[[libraries]]
+repo_url = "https://github.com/pola-rs/polars.git"
+dst_folder = "polars"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/GuillaumeGomez/sysinfo.git"
+dst_folder = "sysinfo"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/braintree/sanitize-url.git"
+dst_folder = "sanitize-url"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/cytoscape/cytoscape.js.git"
+dst_folder = "cytoscape"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/cytoscape/cytoscape.js-cose-bilkent.git"
+dst_folder = "cytoscape-cose-bilkent"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/iamkun/dayjs.git"
+dst_folder = "dayjs"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/debug-js/debug.git"
+dst_folder = "debug"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/mermaid-js/mermaid.git"
+dst_folder = "mermaid"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vuejs/vitepress.git"
+dst_folder = "vitepress"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/emersonbottero/vitepress-plugin-mermaid.git"
+dst_folder = "vitepress-plugin-mermaid"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/vuejs/core.git"
+dst_folder = "vue"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://github.com/cloudflare/workers-sdk.git"
+dst_folder = "wrangler"
+use_sparse = false
+
+[[libraries]]
+repo_url = "https://git.tnd.cx/Tuned_Chaos/chaos-nexus.git"
+sub_dir = "chaosnexus-website"
+dst_folder = "chaosnexus-website"
+use_sparse = true
