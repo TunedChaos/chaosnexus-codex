@@ -4,7 +4,7 @@
 
 Rust documentation indexing, fetch, and MCP/CLI knowledge tool for ChaosNexus.
 
-> **Status:** early public soft launch (pre-1.0).
+> **Status:** early public alpha launch (pre-1.0).
 
 - **Docs:** [chaosnexus.ai](https://chaosnexus.ai)
 - **Contribute:** [codeberg.org/TunedChaos/chaosnexus-codex](https://codeberg.org/TunedChaos/chaosnexus-codex) (primary)
