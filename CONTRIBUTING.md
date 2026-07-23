@@ -1,10 +1,18 @@
 # Contributing to ChaosNexus
 
-Thank you for your interest in helping build secure, sovereign local AI infrastructure! 
+Thank you for your interest in helping build secure, sovereign local AI infrastructure.
 
-### ⚖️ Contribution Licensing Agreement
+### Where to contribute
 
-By contributing to ChaosNexus and its associated tools, you grant Tuned Chaos LLC a perpetual, unrestricted, worldwide license to distribute your contribution under both open-source and commercial licenses, while you retain your rights. 
+**Codeberg is the primary forge for issues and pull requests:** [codeberg.org/TunedChaos](https://codeberg.org/TunedChaos).
+
+GitHub repositories under TunedChaos are **read-only mirrors** (discoverability and Sponsors). Do not open feature PRs on GitHub mirrors.
+
+See https://chaosnexus.ai/guide/contribute and https://chaosnexus.ai/REPOSITORY_ARCHITECTURE.
+
+### Contributor Licensing Agreement
+
+By contributing to ChaosNexus and its associated tools, you grant Tuned Chaos LLC a perpetual, unrestricted, worldwide license to distribute your contribution under both open-source and commercial licenses, while you retain your rights.
 
 If you do not wish to grant these rights to Tuned Chaos LLC, please do not submit contributions.
 
@@ -24,7 +32,7 @@ The purpose of ChaosNexus is to provide a local-first, zero-trust Agentic Orches
 
 ## Ground rules
 
-Before contributing, please ensure you review our repository architecture and guidelines. We expect all contributors to interact respectfully and constructively.
+Before contributing, please ensure you review our repository architecture and guidelines. We expect all contributors to interact respectfully and constructively. Follow the Code of Conduct.
 
 ## Community engagement
 
