@@ -22,6 +22,12 @@ dst_folder = "anyhow"
 use_sparse = false
 
 [[libraries]]
+repo_url = "https://github.com/wevm/wagmi.git"
+# sub_dir = ""
+dst_folder = "wagmi"
+use_sparse = false
+
+[[libraries]]
 repo_url = "https://github.com/dtolnay/async-trait.git"
 # sub_dir = ""
 dst_folder = "async-trait"

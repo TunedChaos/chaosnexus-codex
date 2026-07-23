@@ -1,3 +1,4 @@
+// chaosnexus-codex/src/config.rs
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
@@ -64,61 +65,70 @@ impl CodexConfig {
         base.join("data")
     }
 
-    /// Loads the configuration hierarchically.
+    /// Loads the configuration hierarchically matching chaosnexus-anvil's model.
     pub fn load() -> Self {
         let mut final_config = Self::default();
 
         if let Some(base_dirs) = directories::BaseDirs::new() {
-            let global_config_path = base_dirs.home_dir().join(".chaosnexus").join("chaosnexus-codex").join("config.toml");
-            if global_config_path.exists() {
-                if let Ok(contents) = std::fs::read_to_string(&global_config_path)
-                    && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
-                        final_config.merge(config);
-                    }
-            } else {
-                let boilerplate = r#"# ChaosNexus Codex Configuration
-# port = 3000 # Uncomment to run as an SSE HTTP server on the given port by default
-# default_offset = 0 # Default character offset for reading documentation pages
-# default_limit = 16000 # Default maximum character limit for reading documentation pages
-# library_type = "shared" # Or "local"
-
-# Example: TypeScript
-# [[libraries]]
-# repo_url = "https://github.com/microsoft/TypeScript-Website.git"
-# sub_dir = "packages/documentation/copy/en"
-# dst_folder = "typescript"
-# use_sparse = false
-"#;
-                if let Some(parent) = global_config_path.parent() {
-                    let _ = std::fs::create_dir_all(parent);
+            let home = base_dirs.home_dir();
+            let candidate_paths = [
+                home.join(".chaosnexus").join("codex").join("chaosnexus-codex.toml"),
+                home.join(".chaosnexus").join("codex").join("codex.toml"),
+                home.join(".chaosnexus").join("codex").join("config.toml"),
+                home.join(".chaosnexus").join("chaosnexus-codex").join("chaosnexus-codex.toml"),
+                home.join(".chaosnexus").join("chaosnexus-codex").join("codex.toml"),
+                home.join(".chaosnexus").join("chaosnexus-codex").join("config.toml"),
+            ];
+            for path in &candidate_paths {
+                if path.exists() {
+                    if let Ok(contents) = std::fs::read_to_string(path)
+                        && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
+                            final_config.merge(config);
+                            break;
+                        }
                 }
-                let _ = std::fs::write(&global_config_path, boilerplate);
-                tracing::info!("Created boilerplate config at {:?}", global_config_path);
             }
 
             if let Ok(instance_name) = std::env::var("CHAOS_INSTANCE_NAME") {
-                let instance_config_path = base_dirs.home_dir().join(".chaosnexus").join("chaosnexus-codex").join(&instance_name).join("config.toml");
-                if instance_config_path.exists()
-                    && let Ok(contents) = std::fs::read_to_string(&instance_config_path)
-                        && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
-                            final_config.merge(config);
-                        }
+                let instance_paths = [
+                    home.join(".chaosnexus").join("codex").join(&instance_name).join("chaosnexus-codex.toml"),
+                    home.join(".chaosnexus").join("codex").join(&instance_name).join("config.toml"),
+                    home.join(".chaosnexus").join("chaosnexus-codex").join(&instance_name).join("chaosnexus-codex.toml"),
+                    home.join(".chaosnexus").join("chaosnexus-codex").join(&instance_name).join("config.toml"),
+                ];
+                for path in &instance_paths {
+                    if path.exists() {
+                        if let Ok(contents) = std::fs::read_to_string(path)
+                            && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
+                                final_config.merge(config);
+                                break;
+                            }
+                    }
+                }
             }
         }
 
         let cwd = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
-        let cwd_config_path = cwd.join("chaosnexus-codex.toml");
+        let cwd_candidates = [
+            cwd.join("chaosnexus-codex.toml"),
+            cwd.join("codex.toml"),
+            cwd.join("config.toml"),
+        ];
 
-        if cwd_config_path.exists()
-            && let Ok(contents) = std::fs::read_to_string(&cwd_config_path)
-                && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
-                    final_config.merge(config);
-                }
+        for path in &cwd_candidates {
+            if path.exists() {
+                if let Ok(contents) = std::fs::read_to_string(path)
+                    && let Ok(config) = toml::from_str::<CodexConfig>(&contents) {
+                        final_config.merge(config);
+                        break;
+                    }
+            }
+        }
 
         final_config
     }
 
-    /// Saves the current configuration to the `chaosnexus-codex.toml` file.
+    /// Saves the current configuration to `chaosnexus-codex.toml`.
     #[allow(dead_code)]
     pub fn save(&self) -> std::io::Result<()> {
         let config_path = Path::new("chaosnexus-codex.toml");
