@@ -16,6 +16,10 @@ By contributing to ChaosNexus and its associated tools, you grant Tuned Chaos LL
 
 If you do not wish to grant these rights to Tuned Chaos LLC, please do not submit contributions.
 
+### Generative AI assistance
+
+Some code in this project was generated with assistance from AI. Humans directed architecture, review, and maintenance. Read [AI_ASSISTANCE.md](AI_ASSISTANCE.md) before contributing. If you use generative tools in a pull request, disclose that you used AI assistance and keep changes small and reviewable.
+
 ## Welcome
 
 Welcome to the ChaosNexus Contributing Guide. We are excited to have you here.

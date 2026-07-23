@@ -19,6 +19,10 @@ cargo build --release
 cargo run -- fetch
 ```
 
+## AI assistance
+
+Some code in this project was generated with assistance from AI. Humans directed architecture, review, and maintenance. See [AI_ASSISTANCE.md](AI_ASSISTANCE.md).
+
 ## License
 
 AGPL-3.0-or-later. See [LICENSE](LICENSE).
