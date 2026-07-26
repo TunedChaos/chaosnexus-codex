@@ -1,0 +1,26 @@
+[package]
+name = "chaosnexus-codex"
+version = "0.1.0"
+edition = "2024"
+license = "AGPL-3.0-or-later"
+
+[dependencies]
+rust-mcp-sdk = "0.10.0"
+rust-mcp-transport = "0.9.1"
+tokio = { version = "1.52.3", features = ["full"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+async-trait = "0.1.89"
+walkdir = "2.5.0"
+tempfile = "3.27.0"
+rust-embed = { version = "8.11.0", optional = true }
+toml = "0.8.19"
+dirs = "5.0.1"
+clap = "4.6.1"
+rust-mcp-axum = "0.2.3"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+directories = "6.0.0"
+[features]
+default = []
+embed-docs = ["dep:rust-embed"]
