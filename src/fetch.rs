@@ -1,6 +1,40 @@
+// chaosnexus-codex/src/fetch.rs
 use crate::config::CodexConfig;
+use std::path::{Path, PathBuf};
 use tokio::process::Command;
 use walkdir::WalkDir;
+
+/// Flatten a relative path into a single filename (path separators → `_`).
+pub fn flatten_rel_path(rel: &Path) -> String {
+    rel.to_string_lossy()
+        .replace(std::path::MAIN_SEPARATOR, "_")
+}
+
+/// Copy markdown files from `src_dir` into `dst_dir` using flattened names.
+/// Returns the number of files copied.
+pub fn flatten_markdown_tree(src_dir: &Path, dst_dir: &Path) -> Result<usize, Box<dyn std::error::Error>> {
+    std::fs::create_dir_all(dst_dir)?;
+    let mut count = 0;
+    for entry in WalkDir::new(src_dir) {
+        let Ok(entry) = entry else {
+            continue;
+        };
+        let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
+        let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+        if ext != "md" && ext != "mdx" {
+            continue;
+        }
+        let rel_path = path.strip_prefix(src_dir)?;
+        let flat_name = flatten_rel_path(rel_path);
+        let dst_path = dst_dir.join(flat_name);
+        std::fs::copy(path, dst_path)?;
+        count += 1;
+    }
+    Ok(count)
+}
 
 /// Fetches and flattens all configured documentation libraries.
 /// Reads the library configurations, clones repositories into a temporary directory
@@ -69,26 +103,7 @@ pub async fn fetch_all_docs() -> Result<(), Box<dyn std::error::Error>> {
             continue;
         }
 
-        let mut count = 0;
-        for entry in WalkDir::new(&src_dir) {
-            let Ok(entry) = entry else { continue; };
-
-            let path = entry.path();
-            if !path.is_file() {
-                continue;
-            }
-
-            let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
-            if ext == "md" || ext == "mdx" {
-                let rel_path = path.strip_prefix(&src_dir)?;
-                let flat_name = rel_path.to_string_lossy().replace(std::path::MAIN_SEPARATOR, "_");
-                let dst_path = dst_dir.join(flat_name);
-                
-                std::fs::copy(path, dst_path)?;
-                count += 1;
-            }
-        }
-        
+        let count = flatten_markdown_tree(&src_dir, &dst_dir)?;
         tracing::info!("✅ Fetched and flattened {} files for {}.", count, lib.dst_folder);
     }
 
@@ -97,4 +112,38 @@ pub async fn fetch_all_docs() -> Result<(), Box<dyn std::error::Error>> {
     tracing::info!("Done! Restart chaosnexus-codex (without embed-docs) for changes to take effect.");
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+
+    #[test]
+    fn flatten_rel_path_joins_segments() {
+        let p = PathBuf::from("a").join("b").join("c.md");
+        let flat = flatten_rel_path(&p);
+        assert!(flat.contains("a"));
+        assert!(flat.ends_with("c.md"));
+        assert!(!flat.contains(std::path::MAIN_SEPARATOR));
+    }
+
+    #[test]
+    fn flatten_markdown_tree_copies_md_only() {
+        let tmp = tempfile::tempdir().unwrap();
+        let src = tmp.path().join("src");
+        let dst = tmp.path().join("dst");
+        fs::create_dir_all(src.join("nested")).unwrap();
+        fs::write(src.join("nested").join("page.md"), b"# hi").unwrap();
+        fs::write(src.join("skip.txt"), b"nope").unwrap();
+
+        let n = flatten_markdown_tree(&src, &dst).unwrap();
+        assert_eq!(n, 1);
+        let entries: Vec<_> = fs::read_dir(&dst)
+            .unwrap()
+            .filter_map(|e| e.ok())
+            .collect();
+        assert_eq!(entries.len(), 1);
+        assert!(entries[0].file_name().to_string_lossy().ends_with(".md"));
+    }
 }

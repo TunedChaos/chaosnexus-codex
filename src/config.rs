@@ -133,3 +133,71 @@ impl CodexConfig {
         std::fs::write(config_path, contents)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn merge_prefers_non_empty_overrides() {
+        let mut base = CodexConfig {
+            port: Some(3000),
+            default_offset: Some(0),
+            default_limit: Some(100),
+            storage_path: Some(PathBuf::from("/tmp/a")),
+            library_type: Some("shared".into()),
+            libraries: vec![],
+        };
+        let other = CodexConfig {
+            port: Some(4000),
+            default_offset: None,
+            default_limit: Some(200),
+            storage_path: None,
+            library_type: Some("local".into()),
+            libraries: vec![LibraryConfig {
+                repo_url: "https://example.com/docs.git".into(),
+                sub_dir: "docs".into(),
+                dst_folder: "ex".into(),
+                use_sparse: true,
+            }],
+        };
+        base.merge(other);
+        assert_eq!(base.port, Some(4000));
+        assert_eq!(base.default_offset, Some(0));
+        assert_eq!(base.default_limit, Some(200));
+        assert_eq!(base.storage_path, Some(PathBuf::from("/tmp/a")));
+        assert_eq!(base.library_type.as_deref(), Some("local"));
+        assert_eq!(base.libraries.len(), 1);
+        assert_eq!(base.libraries[0].dst_folder, "ex");
+    }
+
+    #[test]
+    fn toml_roundtrip_parses_libraries() {
+        let raw = r#"
+port = 9090
+default_limit = 4096
+storage_path = "/tmp/codex-data"
+
+[[libraries]]
+repo_url = "https://example.com/r.git"
+sub_dir = "guide"
+dst_folder = "guide"
+use_sparse = false
+"#;
+        let cfg: CodexConfig = toml::from_str(raw).expect("parse");
+        assert_eq!(cfg.port, Some(9090));
+        assert_eq!(cfg.default_limit, Some(4096));
+        assert_eq!(cfg.storage_path, Some(PathBuf::from("/tmp/codex-data")));
+        assert_eq!(cfg.libraries.len(), 1);
+        assert!(!cfg.libraries[0].use_sparse);
+    }
+
+    #[test]
+    fn resolved_storage_path_honors_explicit_path() {
+        let cfg = CodexConfig {
+            storage_path: Some(PathBuf::from("/custom/store")),
+            ..Default::default()
+        };
+        assert_eq!(cfg.resolved_storage_path(), PathBuf::from("/custom/store"));
+    }
+}
