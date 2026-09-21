@@ -24,9 +24,9 @@ Some code in this project was generated with assistance from AI. Humans directed
 
 ## Support
 
-ChaosNexus is maintained by a solo developer. If it helps you, consider sponsoring — it funds continued OSS work, not a support SLA:
+ChaosNexus is maintained by a solo developer. If it helps you, consider sponsoring - it funds continued OSS work, not a support SLA:
 
-**[GitHub Sponsors — TunedChaos](https://github.com/sponsors/TunedChaos)**
+**[GitHub Sponsors - TunedChaos](https://github.com/sponsors/TunedChaos)**
 
 File bugs on [chaosnexus-suite Issues](https://github.com/TunedChaos/chaosnexus-suite/issues) (pick a Component).
 
